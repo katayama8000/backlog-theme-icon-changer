@@ -1,0 +1,13 @@
+{
+  "name": "backlog-theme-icon-changer-ts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/chrome": "^0.1.4",
+    "typescript": "^5.9.2"
+  },
+  "scripts": {
+    "build": "tsc"
+  }
+}
