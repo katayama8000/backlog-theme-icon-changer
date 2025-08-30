@@ -8,7 +8,7 @@ As this extension is not published on the Chrome Web Store, you can load it manu
 
 1.  **Clone or download the repository:**
     ```bash
-    git clone https://github.com/your-username/backlog-theme-icon-changer.git
+    git clone https://github.com/katayama8000/backlog-theme-icon-changer.git
     cd backlog-theme-icon-changer
     ```
 
