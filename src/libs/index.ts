@@ -1,5 +1,5 @@
 import { generateBacklogSvgFavicon } from "./generateBacklogSvgFavicon";
-import { rgbStringToHex } from "./rgbStringToHex";
 import { setFavicon } from "./setFavicon";
+import { backLogThemeColorMap } from "./themeColorMap";
 
-export { generateBacklogSvgFavicon, rgbStringToHex, setFavicon };
+export { generateBacklogSvgFavicon, setFavicon, backLogThemeColorMap };

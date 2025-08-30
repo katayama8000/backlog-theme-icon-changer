@@ -1,48 +1,44 @@
-import { generateBacklogSvgFavicon, rgbStringToHex, setFavicon } from "./libs/index"
+import { generateBacklogSvgFavicon, setFavicon, backLogThemeColorMap } from "./libs/index";
 
 let previousIconUrl: string | undefined;
 
-const checkAndSetFavicon = () => {
-  const projectHeader = document.getElementById('project-header');
-  let newIconUrl: string | undefined;
+const INITIAL_CHECK_DELAY_MS = 50;
 
-  // Check the background color of the project header.
-  if (projectHeader) {
-    const projectColor = projectHeader.style.backgroundColor;
-    console.log('checkAndSetFavicon: Found project header. Color:', projectColor); // Log project header color detection.
+const getThemeName = (): string | null => {
+  const themeClass = Array.from(document.body.classList).find(cls => cls.startsWith('theme-'));
+  return themeClass ? themeClass.split('-')[1] : null;
+};
 
-    const projectColorHex = rgbStringToHex(projectColor);
-    if (projectColorHex) {
-      console.log('checkAndSetFavicon: Converted color to hex:', projectColorHex); // Log RGB to HEX conversion.
-      newIconUrl = generateBacklogSvgFavicon(projectColorHex);
-    }
+const updateFaviconBasedOnTheme = () => {
+  const themeName = getThemeName();
+  if (!themeName) {
+    return;
   }
 
-  // Update the favicon only if the URL has changed.
-  if (newIconUrl && newIconUrl !== previousIconUrl) {
+  const color = backLogThemeColorMap[themeName];
+  if (!color) {
+    return;
+  }
+
+  const newIconUrl = generateBacklogSvgFavicon(color);
+  if (newIconUrl !== previousIconUrl) {
     setFavicon(newIconUrl);
     previousIconUrl = newIconUrl;
-  } else {
-    console.log('checkAndSetFavicon: No change detected or no new icon URL. Skipping update.'); // Log if no change is detected.
   }
 };
 
-// Use MutationObserver to monitor for DOM changes.
-const observer = new MutationObserver(() => {
-  console.log('MutationObserver: DOM change detected.'); // Log DOM change detection.
-  checkAndSetFavicon();
-});
+const observeThemeChanges = () => {
+  const observer = new MutationObserver((mutations) => {
+    if (mutations.some(m => m.attributeName === 'class')) {
+      updateFaviconBasedOnTheme();
+    }
+  });
 
-// Observe attribute changes on the body and project header.
-observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+  observer.observe(document.body, {
+    attributes: true,
+  });
+};
 
-const projectHeader = document.getElementById('project-header');
-if (projectHeader) {
-  observer.observe(projectHeader, { attributes: true, attributeFilter: ['style'] });
-} else {
-  console.log('checkAndSetFavicon: Project header not found on initial load.'); // Log if project header is not found.
-}
+setTimeout(updateFaviconBasedOnTheme, INITIAL_CHECK_DELAY_MS);
 
-// Initial execution on page load.
-console.log('Initial check on page load.'); // Log initial execution.
-checkAndSetFavicon();
+observeThemeChanges();
