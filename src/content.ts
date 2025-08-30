@@ -1,4 +1,4 @@
-import { generateSvgFavicon, rgbStringToHex, setFavicon } from "./libs/index"
+import { generateBacklogSvgFavicon, rgbStringToHex, setFavicon } from "./libs/index"
 
 let previousIconUrl: string | undefined;
 
@@ -14,7 +14,7 @@ const checkAndSetFavicon = () => {
     const projectColorHex = rgbStringToHex(projectColor);
     if (projectColorHex) {
       console.log('checkAndSetFavicon: Converted color to hex:', projectColorHex); // Log RGB to HEX conversion.
-      newIconUrl = generateSvgFavicon(projectColorHex);
+      newIconUrl = generateBacklogSvgFavicon(projectColorHex);
     }
   }
 

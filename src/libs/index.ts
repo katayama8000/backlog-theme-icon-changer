@@ -1,5 +1,5 @@
-import { generateSvgFavicon } from "./generateBacklogSvgFavicon";
+import { generateBacklogSvgFavicon } from "./generateBacklogSvgFavicon";
 import { rgbStringToHex } from "./rgbStringToHex";
 import { setFavicon } from "./setFavicon";
 
-export { generateSvgFavicon, rgbStringToHex, setFavicon };
+export { generateBacklogSvgFavicon, rgbStringToHex, setFavicon };

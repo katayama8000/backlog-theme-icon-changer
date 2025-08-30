@@ -9,6 +9,7 @@
     "typescript": "^5.9.2"
   },
   "scripts": {
-    "build": "esbuild src/content.ts --bundle --outfile=dist/content.js"
+    "build": "esbuild src/content.ts --bundle --outfile=dist/content.js",
+    "watch": "esbuild src/content.ts --bundle --outfile=dist/content.js --watch"
   }
 }
