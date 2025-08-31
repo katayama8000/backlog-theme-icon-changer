@@ -39,6 +39,33 @@ const observeThemeChanges = () => {
   });
 };
 
-setTimeout(updateFaviconBasedOnTheme, INITIAL_CHECK_DELAY_MS);
+const updateTitle = () => {
+  const hostname = window.location.hostname;
+  const cleanHostname = hostname.replace(/^https?:\/\//, '');
+
+  const prefix = cleanHostname.startsWith('nulab.localhost') ?
+    '[ローカル環境] ' : cleanHostname.startsWith('nulab.dev') ?
+      '[開発環境] ' : '';
+
+  if (prefix && !document.title.startsWith(prefix)) {
+    document.title = prefix + document.title;
+  }
+};
+
+const observeTitleChanges = () => {
+  const observer = new MutationObserver(() => {
+    updateTitle();
+  });
+  const titleElement = document.querySelector('title');
+  if (titleElement) {
+    observer.observe(titleElement, { childList: true });
+  }
+};
+
+setTimeout(() => {
+  updateFaviconBasedOnTheme();
+  updateTitle();
+}, INITIAL_CHECK_DELAY_MS);
 
 observeThemeChanges();
+observeTitleChanges();
