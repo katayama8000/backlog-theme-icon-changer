@@ -1,4 +1,4 @@
-*.md linguist-detectable=true
-*.md linguist-language=markdown
 *.json linguist-detectable=true
 *.json linguist-language=json
+*.md linguist-detectable=true
+*.md linguist-language=markdown
