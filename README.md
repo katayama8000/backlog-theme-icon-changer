@@ -1,3 +1,6 @@
+> [!WARNING]
+> you can use https://github.com/nulab/backlog-power-ups
+
 # Backlog Theme Icon Changer
 
 A browser extension that dynamically changes the Backlog favicon to match the color of your current theme. This helps you quickly identify your Backlog tabs when you have multiple tabs open.
